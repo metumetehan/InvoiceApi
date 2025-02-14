@@ -1,6 +1,9 @@
+using System.Diagnostics.Eventing.Reader;
 using InvoiceApi;
+using InvoiceApi.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyApp.Namespace
 {
@@ -9,9 +12,19 @@ namespace MyApp.Namespace
     public class TaxController : ControllerBase
     {
 
+
+        // private readonly TaxDbContext _context;
+
+        // public TaxController(TaxDbContext context)
+        // {
+        //     _context = context;
+        // }
+
         [HttpGet("filtered")]
         public IActionResult GetTaxData([FromQuery] string date, [FromQuery] string country, [FromQuery] string cityOrState)
         {
+            if(string.IsNullOrEmpty(date))
+                date = "2025-02-14";
             if (string.IsNullOrEmpty(date) || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(cityOrState))
             {
                 return BadRequest("Missing required parameters: date, country, and cityOrState");
@@ -19,15 +32,76 @@ namespace MyApp.Namespace
 
             Console.WriteLine($"Received Request: Date={date}, Country={country}, CityOrState={cityOrState}");
             
+            //var taxes = await _context.Taxes.ToListAsync();
 
-            // TODO: Replace with your own logic to fetch tax data from database
-            var taxData = new List<Tax>
+            var taxData = new List<Tax>{};
+            // TODO: Replace with a logic to fetch tax data from database
+            if (country == "USA" && cityOrState == "Florida" && date == "2025-07-31")
             {
-                new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
-                new Tax { Id = 2, Title = "TL Levy", Rate = 0.01m, Deducted = true },
-                new Tax { Id = 3, Title = "Get Fund Levy", Rate = 0.025m, Deducted = false },
-                new Tax { Id = 4, Title = "NHIL", Rate = 0.025m, Deducted = false },
-            };
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.0m, Deducted = false },
+                    new Tax { Id = 2, Title = "Back-to-School tax holiday (tax-tree)", Rate = 0.0m, Deducted = false },
+                };
+            }
+            else if (country == "USA" && cityOrState == "California")
+            {
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+                    new Tax { Id = 2, Title = "$ Levy", Rate = 0.01m, Deducted = true },
+                    new Tax { Id = 3, Title = "State Sales Tax", Rate = 0.072m, Deducted = false },
+                    new Tax { Id = 4, Title = "Local Sales Tax", Rate = 0.025m, Deducted = false },
+                    new Tax { Id = 5, Title = "CA Environmental Fee", Rate = 0.01m, Deducted = false },
+                    
+                };
+            }
+            else if (country == "USA" && cityOrState == "Florida")
+            {
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+                    new Tax { Id = 2, Title = "$ Levy", Rate = 0.01m, Deducted = true },
+                    new Tax { Id = 3, Title = "State Sales Tax", Rate = 0.06m, Deducted = false },
+                    new Tax { Id = 4, Title = "Discretionary Sales Surtax", Rate = 0.01m, Deducted = false },
+                };
+            }
+            else if (country == "Germany")
+            {
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.19m, Deducted = false },
+                    new Tax { Id = 2, Title = "£ Levy", Rate = 0.01m, Deducted = true },
+                    new Tax { Id = 3, Title = "Solidarity Surcharge", Rate = 0.055m, Deducted = false },
+                    new Tax { Id = 4, Title = "Trade Tax", Rate = 0.14m, Deducted = false }
+                };
+            }
+            else if (country == "Turkey" && date == "2025-02-14")
+            {
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+                    new Tax { Id = 2, Title = "TL Levy", Rate = 0.01m, Deducted = true },
+                    new Tax { Id = 3, Title = "Get Fund Levy", Rate = 0.025m, Deducted = false },
+                    new Tax { Id = 4, Title = "Covid Levy", Rate = 0.01m, Deducted = false },
+                    new Tax { Id = 5, Title = "NHIL", Rate = 0.025m, Deducted = false },
+                };
+            }
+            else if (country == "Turkey")
+            {
+                taxData = new List<Tax>
+                {
+                    new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+                    new Tax { Id = 2, Title = "TL Levy", Rate = 0.01m, Deducted = true },
+                    new Tax { Id = 3, Title = "Getfund, NHIL & Covid Levy", Rate = 0.06m, Deducted = false },
+                };
+            }
+
+
+
+
+            
+            
 
             return Ok(taxData);
 
