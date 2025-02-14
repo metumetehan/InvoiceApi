@@ -8,6 +8,32 @@ namespace MyApp.Namespace
     [ApiController]
     public class TaxController : ControllerBase
     {
+
+        [HttpGet("filtered")]
+        public IActionResult GetTaxData([FromQuery] string date, [FromQuery] string country, [FromQuery] string cityOrState)
+        {
+            if (string.IsNullOrEmpty(date) || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(cityOrState))
+            {
+                return BadRequest("Missing required parameters: date, country, and cityOrState");
+            }
+
+            Console.WriteLine($"Received Request: Date={date}, Country={country}, CityOrState={cityOrState}");
+            
+
+            // TODO: Replace with your own logic to fetch tax data from database
+            var taxData = new List<Tax>
+            {
+                new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+                new Tax { Id = 2, Title = "TL Levy", Rate = 0.01m, Deducted = true },
+                new Tax { Id = 3, Title = "Get Fund Levy", Rate = 0.025m, Deducted = false },
+                new Tax { Id = 4, Title = "NHIL", Rate = 0.025m, Deducted = false },
+            };
+
+            return Ok(taxData);
+
+
+        }
+
         static private List<Tax> taxes = new List<Tax>
         {
             new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
