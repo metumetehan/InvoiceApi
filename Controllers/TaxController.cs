@@ -50,7 +50,7 @@ namespace MyApp.Namespace
                 {
                     new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
                     new Tax { Id = 2, Title = "$ Levy", Rate = 0.01m, Deducted = true },
-                    new Tax { Id = 3, Title = "State Sales Tax", Rate = 0.072m, Deducted = false },
+                    new Tax { Id = 3, Title = "State Sales Tax", Rate = 0.0725m, Deducted = false },
                     new Tax { Id = 4, Title = "Local Sales Tax", Rate = 0.025m, Deducted = false },
                     new Tax { Id = 5, Title = "CA Environmental Fee", Rate = 0.01m, Deducted = false },
                     
@@ -73,7 +73,7 @@ namespace MyApp.Namespace
                     new Tax { Id = 1, Title = "VAT", Rate = 0.19m, Deducted = false },
                     new Tax { Id = 2, Title = "£ Levy", Rate = 0.01m, Deducted = true },
                     new Tax { Id = 3, Title = "Solidarity Surcharge", Rate = 0.055m, Deducted = false },
-                    new Tax { Id = 4, Title = "Trade Tax", Rate = 0.14m, Deducted = false }
+                    new Tax { Id = 4, Title = "Trade Tax", Rate = 0.145m, Deducted = false }
                 };
             }
             else if (country == "Turkey" && date == "2025-02-14")
