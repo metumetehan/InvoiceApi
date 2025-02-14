@@ -32,3 +32,4 @@ D:\angular_projects\invoice-api\InvoiceApi\obj\Debug\net9.0\InvoiceApi.pdb
 D:\angular_projects\invoice-api\InvoiceApi\obj\Debug\net9.0\InvoiceApi.genruntimeconfig.cache
 D:\angular_projects\invoice-api\InvoiceApi\obj\Debug\net9.0\ref\InvoiceApi.dll
 D:\angular_projects\invoice-api\InvoiceApi\bin\Debug\net9.0\Scalar.AspNetCore.dll
+d:\angular_projects\invoice-api\InvoiceApi\obj\Debug\net9.0\InvoiceApi.sourcelink.json

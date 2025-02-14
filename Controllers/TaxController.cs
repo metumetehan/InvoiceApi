@@ -10,11 +10,11 @@ namespace MyApp.Namespace
     {
         static private List<Tax> taxes = new List<Tax>
         {
-            new Tax { Id = 1, Name = "VAT", Rate = 0.15m, Deducted = false },
-            new Tax { Id = 2, Name = "TL Levy", Rate = 0.01m, Deducted = true },
-            new Tax { Id = 3, Name = "Get Fund Levy", Rate = 0.025m, Deducted = false },
-            new Tax { Id = 4, Name = "Covid Levy", Rate = 0.01m, Deducted = false },
-            new Tax { Id = 5, Name = "NHIL", Rate = 0.025m, Deducted = false },
+            new Tax { Id = 1, Title = "VAT", Rate = 0.15m, Deducted = false },
+            new Tax { Id = 2, Title = "TL Levy", Rate = 0.01m, Deducted = true },
+            new Tax { Id = 3, Title = "Get Fund Levy", Rate = 0.025m, Deducted = false },
+            new Tax { Id = 4, Title = "Covid Levy", Rate = 0.01m, Deducted = false },
+            new Tax { Id = 5, Title = "NHIL", Rate = 0.025m, Deducted = false },
             
         };
 
@@ -60,7 +60,7 @@ namespace MyApp.Namespace
             {
                 return NotFound();
             }
-            existingTax.Name = tax.Name;
+            existingTax.Title = tax.Title;
             existingTax.Rate = tax.Rate;
             existingTax.Deducted = tax.Deducted;
             return NoContent();
